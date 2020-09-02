@@ -10,6 +10,8 @@ const createError = require('http-errors');
 const cors = require('cors');
 
 const app = express();
+app.use(cors());
+
 const staticRoot = join(__dirname, 'public');
 
 // view engine setup
@@ -32,7 +34,7 @@ app.use(
 );
 app.use(express.static(staticRoot));
 app.use(flash());
-app.use(cors());
+// app.use(cors());
 app.use('/', router);
 
 // catch 404 and forward to error handler
