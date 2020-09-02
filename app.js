@@ -7,7 +7,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const router = require('./routes');
 const createError = require('http-errors');
-// const cors = require('cors');
+const cors = require('cors');
 
 const app = express();
 const staticRoot = join(__dirname, 'public');
@@ -17,7 +17,7 @@ app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(favicon(join(staticRoot, 'images', 'favicon.png')));
-// app.use(cors());
+
 app.use(logger('braintree_example:app', 'dev'));
 app.use(json());
 app.use(urlencoded({ extended: false }));
@@ -32,7 +32,7 @@ app.use(
 );
 app.use(express.static(staticRoot));
 app.use(flash());
-
+app.use(cors());
 app.use('/', router);
 
 // catch 404 and forward to error handler
