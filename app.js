@@ -7,10 +7,10 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const router = require('./routes');
 const createError = require('http-errors');
-const cors = require('cors');
+// const cors = require('cors');
 
 const app = express();
-app.use(cors());
+// app.use(cors());
 
 const staticRoot = join(__dirname, 'public');
 
@@ -66,6 +66,12 @@ app.use((err, req, res, next) => {
     message: err.message,
     error: {},
   });
+});
+
+app.all('/*', function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+  next();
 });
 
 module.exports = app;
