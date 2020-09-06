@@ -38,7 +38,6 @@ app.use(
 app.use(express.static(staticRoot));
 app.use(flash());
 
-app.use(cors());
 app.use('/', router);
 
 // catch 404 and forward to error handler
