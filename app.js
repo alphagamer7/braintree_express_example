@@ -7,6 +7,8 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const router = require('./routes');
 const createError = require('http-errors');
+const cors = require('cors');
+
 // const cors = require('cors');
 
 const app = express();
@@ -32,14 +34,10 @@ app.use(
     resave: true,
   })
 );
+app.use(cors());
 app.use(express.static(staticRoot));
 app.use(flash());
 
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  next();
-});
 // app.use(cors());
 app.use('/', router);
 
@@ -75,8 +73,6 @@ app.use((err, req, res, next) => {
 });
 
 app.all('/*', function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
   next();
 });
 
