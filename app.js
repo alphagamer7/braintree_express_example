@@ -34,11 +34,11 @@ app.use(
     resave: true,
   })
 );
-app.use(cors());
+
 app.use(express.static(staticRoot));
 app.use(flash());
 
-// app.use(cors());
+app.use(cors());
 app.use('/', router);
 
 // catch 404 and forward to error handler
@@ -70,10 +70,6 @@ app.use((err, req, res, next) => {
     message: err.message,
     error: {},
   });
-});
-
-app.all('/*', function (req, res, next) {
-  next();
 });
 
 module.exports = app;
